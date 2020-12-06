@@ -66,14 +66,7 @@ public class Gadget {
 			a.setGadget(this);
 		}
 	}
-	@Override
-	public String toString() {
-		return "Gadget [gadgetId=" + gadgetId + ", gadgetName=" + gadgetName + ", gadgetPrice=" + gadgetPrice
-				+ ", description=" + description + ", getGadgetId()=" + getGadgetId() + ", getGadgetName()="
-				+ getGadgetName() + ", getGadgetPrice()=" + getGadgetPrice() + ", getDescription()=" + getDescription()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
-	}
+	
 	
 	
 }
