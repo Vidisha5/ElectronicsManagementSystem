@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,15 +68,17 @@ public class GadgetController {
 	@PreAuthorize("hasAnyRole('USER','SALES','ADMIN')")
 	@GetMapping
 	@Transactional(readOnly=true)
-	public List<Gadget> getAll() {
+	public List<Gadget>  getAll() {
 		
-		
-		List<Gadget> list=new ArrayList<>();
+		List<Gadget> mapStream=new ArrayList<>();
 		//gadgetRepository.findAll().forEach(list::add);
-		gadgetRepository.getAll().forEach(gadget->{ 
-			list.add(gadget);
-		});
-		return list;
+		/*
+		 * gadgetRepository.getAll().forEach(gadget->{ list.add(gadget); });
+		 */
+		try(Stream<Gadget> gadgetStream=gadgetRepository.getAll()){
+			 mapStream = gadgetStream.collect(Collectors.toList());
+		}
+		return mapStream;
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
