@@ -27,8 +27,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
    MyUserDetailsService userDetailsService;
    
    
-   
-   
    @Override 
    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
    
@@ -38,7 +36,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
    @Override 
    protected void configure(HttpSecurity http) throws Exception { 
 	   
-	   http
+	   
+	http
 	   		.authorizeRequests() 
 	   		.antMatchers("/api/v1/gadgets").hasAnyRole("USER","SALES","ADMIN")
 	   		.antMatchers("/api/v1/gadgets/**").hasRole("ADMIN")

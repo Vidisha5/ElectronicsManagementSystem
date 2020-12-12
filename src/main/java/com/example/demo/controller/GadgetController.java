@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
+import com.example.demo.exception.RecordNotFoundException;
 import com.example.demo.dao.GadgetRepository;
 import com.example.demo.domain.Gadget;
 
@@ -54,13 +54,14 @@ public class GadgetController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{gadgetId}")
-	public ResponseEntity<Gadget> getById(@PathVariable String gadgetId) {
+	public ResponseEntity<Gadget> getById(@PathVariable String gadgetId){
 		LOGGER.info("gadgetId"+gadgetId);
 		
 		Optional<Gadget> optionalGadget=gadgetRepository.findById(gadgetId);
 		if(!optionalGadget.isPresent()) {
-			return ResponseEntity.unprocessableEntity().build();
+			throw new RecordNotFoundException("Record Not found");
 		}
+		
 		return ResponseEntity.ok(optionalGadget.get());
 	}
 	

@@ -57,6 +57,8 @@ public class Accessory {
 	public void setGadget(Gadget gadget) {
 		this.gadget = gadget;
 	}
+
+	
 	
 	
 }
