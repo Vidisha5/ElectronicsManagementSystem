@@ -30,7 +30,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
    @Override 
    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
    
-	   auth.authenticationProvider(authProvider());
+	   //auth.authenticationProvider(authProvider());
+	   auth.userDetailsService(userDetailsService);
+	   
+	
    }
    
    @Override 
@@ -43,7 +46,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	   		.antMatchers("/api/v1/gadgets/**").hasRole("ADMIN")
 	   		.antMatchers("/register").hasRole("ADMIN")
 			.and()
-			.formLogin();
+			.formLogin()
+			.and()
+			.logout();
    }
    
    
@@ -54,14 +59,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
    }
    
    
-   @Bean 
+  /*@Bean 
    public DaoAuthenticationProvider authProvider() throws Exception 
    {
 	   DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
 	   provider.setUserDetailsService(userDetailsService);
 	   provider.setPasswordEncoder(passwordEncoder()); 
 	   return provider;  
-   }
+   }*/
    
   
 }
